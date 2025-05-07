@@ -1,0 +1,59 @@
+import nltk
+nltk.download('punkt', force=True)  
+
+nltk.download('punkt_tab') 
+
+import shutil
+shutil.rmtree('/root/nltk_data/tokenizers/punkt', ignore_errors=True)
+
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')  # Ensure this one works
+
+import nltk
+nltk.download('averaged_perceptron_tagger_eng')
+
+import nltk
+
+from collections import Counter
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+# Download necessary NLTK resources
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
+
+# Load SpaCy NLP model
+
+
+# Sample text input
+text = """Natural Language Processing (NLP) is a field of Artificial Intelligence
+(AI) that focuses on the interaction between computers and humans using natural language.
+The goal is to enable computers to understand, interpret, and generate human
+language in a useful way."""
+
+# **Step 1: Tokenization**
+tokens = word_tokenize(text)
+print("\n**Tokenized Words:**\n", tokens)
+
+# **Step 2: Word Frequency Count**
+word_freq = Counter(tokens)
+print("\n**Word Frequency Count:**\n", word_freq)
+
+# **Step 3: Stopword Removal**
+stop_words = set(stopwords.words("english"))
+filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
+print("\n**After Stopword Removal:**\n", filtered_tokens)
+
+# **Step 4: POS Tagging**
+pos_tags = nltk.pos_tag(filtered_tokens)
+print("\n**POS Tagging (NLTK):**\n", pos_tags)
+
+# **Step 5: AI-based POS Tagging using SpaCy**
+doc = nlp(text)
+print("\n**POS Tagging (SpaCy):**")
+for token in doc:
+    print(f"{token.text} --> {token.pos_}")
