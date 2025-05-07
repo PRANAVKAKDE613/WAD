@@ -1,0 +1,77 @@
+# Bubble Sort Algorithm
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        swapped = False  # Flag to check if a swap occurred
+        for j in range(0, n-i-1):
+            # Reasoning: If the current element is greater than the next, swap them
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]  # Swap
+                swapped = True
+        if not swapped:
+            break  # If no elements were swapped, the array is sorted
+    return arr
+
+
+# Selection Sort Algorithm
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1, n):
+            # Reasoning: Find the minimum element in the remaining unsorted portion
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        # Swap the found minimum element with the first element of the unsorted portion
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+# Insertion Sort Algorithm
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key  # Insert the key at the correct position
+    return arr
+
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr  # Base case: already sorted
+    pivot = arr[len(arr) // 2]  # Choose the middle element as pivot
+    left = [x for x in arr if x < pivot]     # Elements less than pivot
+    middle = [x for x in arr if x == pivot]  # Elements equal to pivot
+    right = [x for x in arr if x > pivot]    # Elements greater than pivot
+    return quicksort(left) + middle + quicksort(right)
+
+# Example usage:
+if __name__ == "__main__":
+    arr = [64, 34, 25, 12, 22, 11, 90]
+    
+  
+
+    print("\nBubble Sort:")
+    print("Before:", arr)
+    sorted_arr = bubble_sort(arr.copy())  # Copy the array to preserve the original one
+    print("After:", sorted_arr)
+    
+    
+    print("\nSelection Sort:")
+    print("Before:", arr)
+    sorted_arr = selection_sort(arr.copy())
+    print("After:", sorted_arr)
+    
+    
+    print("\nInsertion Sort:")
+    print("Before:", arr)
+    sorted_arr = insertion_sort(arr.copy())
+    print("After:", sorted_arr)
+    
+    print("\nQuickSort:")
+    print("Before:", arr)
+    sorted_arr = quicksort(arr.copy())
+    print("After:", sorted_arr)
+
+
