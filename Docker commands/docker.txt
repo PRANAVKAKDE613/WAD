@@ -1,0 +1,43 @@
+** docker --version
+Show the Docker version installed.
+
+** docker info
+Display system-wide information about Docker.
+
+**  docker pull <image>
+Download an image from Docker Hub (e.g., docker pull nginx).
+
+** docker images
+List all local images.
+
+** docker rmi <image>
+Remove an image.
+
+**  docker run <image>
+Run a container from an image.
+
+**  docker run -it <image>
+Run a container interactively (with terminal).
+
+**  docker run -d <image>
+Run a container in detached mode (in the background).
+
+**  docker run -p 8080:80 <image>
+Map container port 80 to host port 8080.
+docker ps
+List running containers.
+
+**  docker ps -a
+List all containers (including stopped ones).
+
+**  docker stop <container>
+Stop a running container.
+
+**  docker start <container>
+Start a stopped container.
+
+**  docker restart <container>
+Restart a container.
+
+**  docker rm <container>
+Remove a stopped container.

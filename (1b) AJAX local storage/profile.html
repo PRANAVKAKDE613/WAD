@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <div class="container" style="margin-top: 50px; max-width: 500px;">
+    <div class="panel panel-primary">
+      <div class="panel-heading text-center"><h3>User Profile</h3></div>
+      <div class="panel-body text-center" id="profile-container">
+        <!-- Profile info will be injected here -->
+      </div>
+      <div class="panel-footer text-center">
+        <button class="btn btn-danger" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function loadProfile() {
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+
+      if (!user) {
+        alert("No user is currently logged in.");
+        window.location.href = "login.html"; // redirect to login
+        return;
+      }
+
+      const container = document.getElementById("profile-container");
+
+      container.innerHTML = `
+        <p><strong>Name:</strong> ${user.name}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+      `;
+    }
+
+    function logout() {
+      localStorage.removeItem("currentUser");
+      alert("Logged out successfully.");
+      window.location.href = "login.html"; // Redirect to login page
+    }
+
+    loadProfile();
+  </script>
+
+</body>
+</html>

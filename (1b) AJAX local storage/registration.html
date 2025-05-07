@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="style.css"> <!-- Optional external CSS -->
+</head>
+<body>
+
+  <div class="container" style="margin-top: 50px; max-width: 500px;">
+    <div class="panel panel-default">
+      <div class="panel-heading text-center"><h3>Registration Form</h3></div>
+      <div class="panel-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+          </div>
+
+          <div class="text-center">
+            <button type="button" onclick="saveData()" class="btn btn-primary">Submit</button>
+            
+          </div>
+          <br><br>
+
+          <div class="text-center">
+            <button type="button" onclick="goToLogin()" >Go To Login</button>
+            
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function goToLogin (){
+      window.location.href = "login.html"
+    }
+
+
+
+    function saveData() {
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
+
+      // Check if all fields are filled
+      if (!name || !email || !password) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      let user_records = JSON.parse(localStorage.getItem("users")) || [];
+
+      if (user_records.some(user => user.email === email)) {
+        alert("User with this email already exists.");
+      } else {
+        user_records.push({
+          name: name,
+          email: email,
+          password: password
+        });
+
+        localStorage.setItem("users", JSON.stringify(user_records));
+        alert("Registration successful!");
+
+        // Clear form
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+      }
+    }
+  </script>
+
+</body>
+</html>
