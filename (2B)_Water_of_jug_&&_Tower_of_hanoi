@@ -1,0 +1,60 @@
+
+# water of jug
+from collections import deque
+
+def water_jug_problem():
+    visited = set()
+    queue = deque()
+
+    # (jug1, jug2)
+    queue.append((0, 0))
+
+    while queue:
+        a, b = queue.popleft()
+
+        if (a, b) in visited:
+            continue
+
+        visited.add((a, b))
+        print(f"Jug1: {a}L, Jug2: {b}L")
+
+        if a == 2 or b == 2:
+            print("Goal reached!")
+            return
+
+        # Define the jug capacities
+        cap1, cap2 = 4, 3
+
+        # All possible states from current state
+        states = [
+            (cap1, b),  # Fill Jug1
+            (a, cap2),  # Fill Jug2
+            (0, b),     # Empty Jug1
+            (a, 0),     # Empty Jug2
+            (a - min(a, cap2 - b), b + min(a, cap2 - b)),  # Pour Jug1 -> Jug2
+            (a + min(b, cap1 - a), b - min(b, cap1 - a))   # Pour Jug2 -> Jug1
+        ]
+
+        for state in states:
+            if state not in visited:
+                queue.append(state)
+
+water_jug_problem()
+
+
+
+
+
+# tower of hanoi
+def towers_of_hanoi(n, source, auxiliary, destination):
+    if n == 1:
+        print(f"Move disk 1 from {source} to {destination}")
+        return
+    towers_of_hanoi(n - 1, source, destination, auxiliary)
+    print(f"Move disk {n} from {source} to {destination}")
+    towers_of_hanoi(n - 1, auxiliary, source, destination)
+
+# Example: 3 disks
+towers_of_hanoi(3, 'A', 'B', 'C')
+
+
